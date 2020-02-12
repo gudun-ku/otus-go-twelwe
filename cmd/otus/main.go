@@ -29,16 +29,16 @@ func main() {
 
 	serv := http.Server{
 		Addr:    net.JoinHostPort("", port),
-		Handler: router
+		Handler: router,
 	}
-	//goroutine using
+
 	go serv.ListenAndServe()
 
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt, syscall.SIGTERM)
 
 	<-interrupt
-	timeout, cancelFunc := context.WithTimeout(context.Background(), 5 * time.Second)
+	timeout, cancelFunc := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancelFunc()
 	serv.Shutdown(timeout)
 }

@@ -35,7 +35,7 @@ func main() {
 		Handler: router,
 	}
 
-	log.info("App is starting...")
+	log.Info("App is starting...")
 	go serv.ListenAndServe()
 
 	interrupt := make(chan os.Signal, 1)
